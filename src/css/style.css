@@ -75,7 +75,6 @@ p {
   font-size: var(--small-font);
   width: 110px;
   height: 80px;
-
   flex-direction: column;
   align-items: flex-end;
   box-shadow: 1px 1px 4px var(--light-grey);
@@ -192,6 +191,20 @@ button {
 }
 
 /* End product list card */
+
+/* Discount Badge Styles */
+.discount-badge {
+  display: inline-block;
+  margin-left: 10px;
+  background-color: #e74c3c; /* Vibrant red */
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* End Discount Badge Styles */
 
 .product-detail {
   padding: 1em;
