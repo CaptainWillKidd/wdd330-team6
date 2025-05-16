@@ -13,7 +13,6 @@ export default class ProductDetails {
     
     this.renderProductDetails();
 
-    // Corrected event listener (removed duplicate .getElementById chain)
     document.getElementById('addToCart')
       .addEventListener('click', this.addProductToCart.bind(this));
   }
@@ -33,30 +32,48 @@ function productDetailsTemplate(product) {
   // Set up basic product details
   document.querySelector('h2').textContent = product.Brand.Name;
   document.querySelector('h3').textContent = product.NameWithoutBrand;
-  
+
   const productImage = document.getElementById('productImage');
   productImage.src = product.Image;
   productImage.alt = product.NameWithoutBrand;
 
-  // Format and display the product price
-  const productPriceEl = document.getElementById('productPrice');
-  productPriceEl.textContent = `$${product.FinalPrice.toFixed(2)}`;
-  
-  // Check for a discount: if FinalPrice is less than SuggestedRetailPrice...
+  const productPriceContainer = document.getElementById('productPrice');
+
   if (product.FinalPrice < product.SuggestedRetailPrice) {
-    const discountPerc = Math.round(
-      ((product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice) *
-        100
-    );
-    const discountBadge = document.createElement('span');
-    discountBadge.className = 'discount-badge';
-    discountBadge.textContent = `${discountPerc}% OFF`;
-    // Insert the discount badge immediately after the price element.
-    productPriceEl.parentElement.insertBefore(discountBadge, productPriceEl.nextSibling);
+    // Create original price (crossed out)
+    const originalPrice = document.createElement("span");
+    originalPrice.className = "original-price";
+    originalPrice.textContent = `$${product.SuggestedRetailPrice.toFixed(2)}`;
+
+    // Create discounted price
+    const finalPrice = document.createElement("span");
+    finalPrice.className = "discounted-price";
+    finalPrice.textContent = `$${product.FinalPrice.toFixed(2)}`;
+
+    // Append both prices to the container
+    productPriceContainer.innerHTML = "";
+    productPriceContainer.appendChild(originalPrice);
+    productPriceContainer.appendChild(finalPrice);
+  } else {
+    productPriceContainer.textContent = `$${product.FinalPrice.toFixed(2)}`;
   }
 
-  document.getElementById('productColor').textContent = product.Colors[0].ColorName;
-  document.getElementById('productDesc').innerHTML = product.DescriptionHtmlSimple;
+  // Add discount percentage badge if applicable
+  if (product.FinalPrice < product.SuggestedRetailPrice) {
+    const discountPerc = Math.round(
+      ((product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice) * 100
+    );
 
-  document.getElementById('addToCart').dataset.id = product.Id;
+    const discountBadge = document.createElement("span");
+    discountBadge.className = "discount-badge";
+    discountBadge.textContent = `${discountPerc}% OFF`;
+
+    // Insert discount badge after the price container
+    productPriceContainer.parentElement.insertBefore(discountBadge, productPriceContainer.nextSibling);
+  }
+
+  document.getElementById("productColor").textContent = product.Colors[0].ColorName;
+  document.getElementById("productDesc").innerHTML = product.DescriptionHtmlSimple;
+
+  document.getElementById("addToCart").dataset.id = product.Id;
 }

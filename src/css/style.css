@@ -216,6 +216,22 @@ button {
   width: 100%;
 }
 
+/* Discounted Price Styling */
+.discounted-price {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #e74c3c; /* Red to highlight the final price */
+  margin-left: 10px;
+}
+
+/* Original Price Styling (crossed out) */
+.original-price {
+  font-size: 1.4rem;
+  color: #888; /* Gray color */
+  text-decoration: line-through;
+  margin-right: 5px;
+}
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;
