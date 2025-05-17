@@ -1,8 +1,8 @@
 import ProductData from './ProductData.mjs';
+
+const dataSource = new ProductData('tents');
 import ProductList from './ProductList.mjs';
 
-const dataSource = new ProductData('tents.json');
-const tentsListEl = document.getElementById('tentsList');
-
-const tentsList = new ProductList('tents', dataSource, tentsListEl);
-tentsList.init();
+const productListElement = document.querySelector('.product-list'); // or your specific selector
+const tentList = new ProductList('tents', dataSource, productListElement);
+tentList.init();
