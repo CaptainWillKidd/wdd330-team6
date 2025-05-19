@@ -1,6 +1,8 @@
 import { getParam } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
 import ProductDetails from "./ProductDetails.mjs";
+import Alert from './Alert.mjs';
+
 
 const dataSource = new ProductData("tents");
 const productID = getParam("product");
@@ -20,8 +22,11 @@ function addProductToCart(product) {
 }
 // add to cart button event handler
 async function addToCartHandler(e) {
+  new Alert();
+  
   const product = await dataSource.findProductById(e.target.dataset.id);
   addProductToCart(product);
+
 }
 
 // add listener to Add to Cart button
