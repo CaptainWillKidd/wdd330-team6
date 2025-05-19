@@ -5,15 +5,22 @@ function renderCartContents() {
   const productList = document.querySelector(".product-list");
   if (!cartItems.length) {
     productList.innerHTML = "<li>Your Shopping Cart is Empty.</li>";
+    displayTotalPrice(0);
     return;
   }
 
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   productList.innerHTML = htmlItems.join("");
 
+  displayTotalPrice(cartItems.reduce((acc, item) => acc + item.FinalPrice, 0));
+
   document.querySelectorAll(".remove-item").forEach(btn => {
     btn.addEventListener("click", removeFromCart);
   });
+}
+
+function displayTotalPrice(itemPrice) {
+  document.querySelector("#cart-total").innerHTML = `$${itemPrice.toFixed(2)}`;
 }
 
 function cartItemTemplate(item, index) {
