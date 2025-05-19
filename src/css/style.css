@@ -130,6 +130,14 @@ button {
   fill: gray;
 }
 
+.cart-footer{
+  font-size: 1.2em;
+  margin-top: 1em;
+  border-top: 2px solid var(--primary-color);
+  padding: 1em;
+  font-weight: 700;
+}
+
 /* End cart icon styles */
 
 .mission {
