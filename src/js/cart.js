@@ -17,6 +17,8 @@ function renderCartContents() {
   document.querySelectorAll(".remove-item").forEach(btn => {
     btn.addEventListener("click", removeFromCart);
   });
+
+  updateCartNumber();
 }
 
 function displayTotalPrice(itemPrice) {
@@ -46,6 +48,15 @@ function removeFromCart(event) {
   cartItems.splice(index, 1);
   setLocalStorage("so-cart", cartItems);
   renderCartContents();
+}
+
+function updateCartNumber() {
+  const cartItems = getLocalStorage("so-cart") || [];
+  const cartCountElement = document.querySelector('.cart-count');
+  //Add a superscript number of items in the cart to the backpack icon according to the number of items in the cart
+  if (cartCountElement) {
+    cartCountElement.textContent = cartItems.length;
+  }
 }
 
 renderCartContents();
