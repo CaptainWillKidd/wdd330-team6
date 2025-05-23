@@ -2,7 +2,7 @@ import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
-  const productList = document.querySelector(".product-list");
+  const productList = document.querySelector(".cart-list");
   if (!cartItems.length) {
     productList.innerHTML = "<li>Your Shopping Cart is Empty.</li>";
     displayTotalPrice(0);
