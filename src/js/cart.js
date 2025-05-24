@@ -10,18 +10,31 @@ function renderCartContents() {
     return;
   }
 
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+  const htmlItems = cartItems.map((item, i) => cartItemTemplate(item, i));
   productList.innerHTML = htmlItems.join("");
 
-  displayTotalPrice(cartItems.reduce((acc, item) => acc + item.FinalPrice, 0));
+  displayTotalPrice(cartItems.reduce((acc, item) => acc + item.FinalPrice * (item.quantity || 1), 0));
 
   document.querySelectorAll(".remove-item").forEach(btn => {
     btn.addEventListener("click", removeFromCart);
   });
 
+  document.querySelectorAll(".cart-qty-input").forEach(input => {
+    input.addEventListener("change", updateQuantity);
+  });
+
   updateCartNumber();
 }
 
+function updateQuantity(e) {
+  const index = e.target.getAttribute("data-index");
+  let cartItems = getLocalStorage("so-cart") || [];
+  let qty = parseInt(e.target.value);
+  if (qty < 1) qty = 1;
+  cartItems[index].quantity = qty;
+  setLocalStorage("so-cart", cartItems);
+  renderCartContents();
+}
 function displayTotalPrice(itemPrice) {
   document.querySelector("#cart-total").innerHTML = `$${itemPrice.toFixed(2)}`;
 }
@@ -30,13 +43,16 @@ function cartItemTemplate(item, index) {
   return `
     <li class="cart-card divider">
       <a href="#" class="cart-card__image">
-        <img src="${item.Image}" alt="${item.Name}" />
+        <img src="${item.Image || item.Images?.PrimaryMedium}" alt="${item.Name}" />
       </a>
       <a href="#">
         <h2 class="card__name">${item.Name}</h2>
       </a>
       <p class="cart-card__color">${item.Colors && item.Colors[0] ? item.Colors[0].ColorName : ''}</p>
-      <p class="cart-card__quantity">qty: 1</p>
+      <label>
+        qty: 
+        <input type="number" min="1" value="${item.quantity || 1}" class="cart-qty-input" data-index="${index}" style="width:50px;">
+      </label>
       <p class="cart-card__price">$${item.FinalPrice}</p>
       <span class="remove-item" data-index="${index}" style="cursor:pointer;color:red;float:right;font-weight:bold;">X</span>
     </li>

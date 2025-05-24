@@ -1,5 +1,6 @@
 // productDetails.mjs
-import { getLocalStorage, setLocalStorage } from './utils.mjs';
+import { getLocalStorage, setLocalStorage, getAlertMessage } from './utils.mjs';
+import Alert from './Alert.mjs';
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -17,11 +18,24 @@ export default class ProductDetails {
       .addEventListener('click', this.addProductToCart.bind(this));
   }
 
-  addProductToCart() {
-    const cartItems = getLocalStorage("so-cart") || [];
-    cartItems.push(this.product);
+  async addProductToCart() {
+    let cartItems = getLocalStorage("so-cart") || [];
+    const existingIndex = cartItems.findIndex(item => item.Id === this.product.Id);
+    let alertType = "";
+    if (existingIndex > -1) {
+      cartItems[existingIndex].quantity = (cartItems[existingIndex].quantity || 1) + 1;
+      alertType = "increment";
+    } else {
+      const productToAdd = { ...this.product, quantity: 1 };
+      cartItems.push(productToAdd);
+      alertType = "add";
+    }
     setLocalStorage("so-cart", cartItems);
     updateCartNumber();
+    displayTotalPrice(cartItems.reduce((acc, item) => acc + item.FinalPrice * (item.quantity || 1), 0));
+
+    const alertData = await getAlertMessage(alertType);
+    new Alert(alertData.message || "Unknown alert", alertData.background || "green", alertData.color || "white");
   }
 
   renderProductDetails() {
