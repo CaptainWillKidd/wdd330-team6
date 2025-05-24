@@ -1,23 +1,17 @@
-function convertToJson(res) {
-  if (res.ok) {
-    return res.json();
-  } else {
-    throw new Error("Bad Response");
-  }
-}
-
 export default class ProductData {
-  constructor(category) {
-    this.category = category;
-    this.path = `../json/${this.category}.json`;
-  }
-  getData() {
-    return fetch(this.path)
-      .then(convertToJson)
-      .then((data) => data);
+  async getData(category) {
+    const response = await fetch(`/json/${category}.json`);
+    const data = await response.json();
+    return data.Result;
   }
   async findProductById(id) {
-    const products = await this.getData();
-    return products.find((item) => item.Id === id);
+    const categories = ["tents", "backpacks", "sleeping-bags", "hammocks"];
+    for (const category of categories) {
+      const response = await fetch(`/json/${category}.json`);
+      const data = await response.json();
+      const found = data.find(product => product.Id === id);
+      if (found) return found;
+    }
+    return null;
   }
 }
