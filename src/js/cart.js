@@ -1,4 +1,5 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { updateCartNumber } from "./ProductDetails.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -17,6 +18,8 @@ function renderCartContents() {
   document.querySelectorAll(".remove-item").forEach(btn => {
     btn.addEventListener("click", removeFromCart);
   });
+
+  updateCartNumber();
 }
 
 function displayTotalPrice(itemPrice) {
@@ -49,3 +52,4 @@ function removeFromCart(event) {
 }
 
 renderCartContents();
+updateCartNumber();

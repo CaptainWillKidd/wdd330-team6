@@ -5,12 +5,12 @@ export default class ProductDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
     this.product = {};
-    this.dataSource = dataSource; 
+    this.dataSource = dataSource;
   }
 
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
-    
+
     this.renderProductDetails();
 
     document.getElementById('addToCart')
@@ -21,10 +21,21 @@ export default class ProductDetails {
     const cartItems = getLocalStorage("so-cart") || [];
     cartItems.push(this.product);
     setLocalStorage("so-cart", cartItems);
+    updateCartNumber();
   }
 
   renderProductDetails() {
     productDetailsTemplate(this.product);
+  }
+
+}
+
+export function updateCartNumber() {
+  const cartItems = getLocalStorage("so-cart") || [];
+  const cartCountElement = document.querySelector('.cart-count');
+  //Add a superscript number of items in the cart to the backpack icon according to the number of items in the cart
+  if (cartCountElement) {
+    cartCountElement.textContent = cartItems.length;
   }
 }
 
