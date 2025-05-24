@@ -25,4 +25,3 @@ document
   .getElementById("addToCart")
   .addEventListener("click", addToCartHandler)
 updateCartNumber();
-  .addEventListener("click", addToCartHandler);
