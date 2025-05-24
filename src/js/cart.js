@@ -1,4 +1,5 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { updateCartNumber } from "./ProductDetails.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -50,13 +51,5 @@ function removeFromCart(event) {
   renderCartContents();
 }
 
-function updateCartNumber() {
-  const cartItems = getLocalStorage("so-cart") || [];
-  const cartCountElement = document.querySelector('.cart-count');
-  //Add a superscript number of items in the cart to the backpack icon according to the number of items in the cart
-  if (cartCountElement) {
-    cartCountElement.textContent = cartItems.length;
-  }
-}
-
 renderCartContents();
+updateCartNumber();
