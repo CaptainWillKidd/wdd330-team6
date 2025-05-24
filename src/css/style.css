@@ -298,3 +298,29 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.category-card {
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+  color: black;
+  text-decoration: none;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+}
+
+.category-card img {
+  width: 100px;
+  height: 100px;
+}
