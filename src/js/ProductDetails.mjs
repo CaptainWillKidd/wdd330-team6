@@ -75,10 +75,17 @@ function productDetailsTemplate(product) {
     finalPrice.className = "discounted-price";
     finalPrice.textContent = `$${product.FinalPrice.toFixed(2)}`;
 
-    // Append both prices to the container
+    // Create amount saved flag
+    const amountSaved = product.SuggestedRetailPrice - product.FinalPrice;
+    const discountFlag = document.createElement("span");
+    discountFlag.className = "discount-flag";
+    discountFlag.textContent = `Save $${amountSaved.toFixed(2)}!`;
+
+    // Append prices and flag to the container
     productPriceContainer.innerHTML = "";
     productPriceContainer.appendChild(originalPrice);
     productPriceContainer.appendChild(finalPrice);
+    productPriceContainer.appendChild(discountFlag);
   } else {
     productPriceContainer.textContent = `$${product.FinalPrice.toFixed(2)}`;
   }

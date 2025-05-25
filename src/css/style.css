@@ -254,6 +254,15 @@ button {
   margin-right: 5px;
 }
 
+/* Discount Flag Styling (Amount Saved) */
+.discount-flag {
+  display: block;
+  font-size: 1rem;
+  color: #27ae60; /* Green to indicate savings */
+  font-weight: bold;
+  margin-top: 5px;
+}
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;
