@@ -21,8 +21,27 @@ export default class ProductList {
     this.listElement = listElement;
   }
   
-  async init() {
+  async init(sortValue) {
     const list = await this.dataSource.getData(this.category);
+
+    switch (sortValue) {
+      case "name-asc":
+        list.sort((a, b) => a.Name.localeCompare(b.Name));
+        break;
+      case "name-desc":
+        list.sort((a, b) => b.Name.localeCompare(a.Name));
+        break;
+      case "price-asc":
+        list.sort((a, b) => a.FinalPrice - b.FinalPrice);
+        break;
+      case "price-desc":
+        list.sort((a, b) => b.FinalPrice - a.FinalPrice);
+        break;
+      default:
+        list.sort((a, b) => a.Name.localeCompare(b.Name));
+        break;
+    }
+
     this.renderList(list);
   }
 

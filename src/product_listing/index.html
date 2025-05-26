@@ -12,8 +12,21 @@
     <header id="main-header" class="divider"></header>
     <main class="divider">
       <section class="products">
-        <h2>Top Products: <span id="category-title"></span></h2>
-        <ul class="product-list"></ul>
+        <div>
+          <h2>Top Products: <span id="category-title"></span></h2>
+          <div>
+            <img class="filter-image" src="../images/categories/filter.png" alt="filter-image">
+            <select id="sortFilter">
+              <option value="name-asc">Name (A > Z)</option>
+              <option value="name-desc">Name (Z > A)</option>
+              <option value="price-asc">Low Price</option>
+              <option value="price-desc">High Price</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <ul class="product-list"></ul>
+        </div>
       </section>
     </main>
     <footer id="main-footer"></footer>

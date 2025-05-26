@@ -180,6 +180,23 @@ button {
   padding: 1rem;
 }
 
+.products > div:nth-child(1){
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.filter-image {
+  width: 30px;
+  height: 30px;
+}
+
+#sortFilter{
+  border: none;
+}
+
 .product-list, .cart-list {
   display: flex;
   flex-flow: row wrap;
