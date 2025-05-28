@@ -59,7 +59,7 @@ function productDetailsTemplate(product) {
   document.querySelector('h3').textContent = product.NameWithoutBrand;
 
   const productImage = document.getElementById('productImage');
-  productImage.src = product.Image;
+  productImage.src = product.Images.PrimaryLarge;
   productImage.alt = product.NameWithoutBrand;
 
   const productPriceContainer = document.getElementById('productPrice');

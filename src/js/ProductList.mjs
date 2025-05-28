@@ -3,9 +3,9 @@ import { renderListWithTemplate } from './utils.mjs';
 function productCardTemplate(product) {
   return `
     <li class="product-card">
-      <a href="../product_pages/index.html?product=${product.Id}">
-        <img src="${product.Images.PrimaryMedium}" alt="${product.Name}">
-        <h2 class="card__brand">${product.Brand.Name}</h2>
+      <a href="../product_pages/?product=${product.Id}">
+        <img src="${product.Images.PrimaryMedium}" alt="Imagem de ${product.Name}">
+        <h2 class="card__brand">${product.Brand.Id} - ${product.Brand.Name}</h2>
         <h3 class="card__name">${product.Name}</h3>
         <p class="product-card__price">$${product.FinalPrice.toFixed(2)}</p>
       </a>
@@ -20,8 +20,27 @@ export default class ProductList {
     this.listElement = listElement;
   }
   
-  async init() {
+  async init(sortValue) {
     const list = await this.dataSource.getData(this.category);
+
+    switch (sortValue) {
+      case "name-asc":
+        list.sort((a, b) => a.Name.localeCompare(b.Name));
+        break;
+      case "name-desc":
+        list.sort((a, b) => b.Name.localeCompare(a.Name));
+        break;
+      case "price-asc":
+        list.sort((a, b) => a.FinalPrice - b.FinalPrice);
+        break;
+      case "price-desc":
+        list.sort((a, b) => b.FinalPrice - a.FinalPrice);
+        break;
+      default:
+        list.sort((a, b) => a.Name.localeCompare(b.Name));
+        break;
+    }
+    
     this.renderList(list);
   }
 

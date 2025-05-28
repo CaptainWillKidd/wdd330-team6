@@ -1,17 +1,26 @@
+const baseURL = import.meta.env.VITE_SERVER_URL;
+
+function convertToJson(res) {
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error("Bad Response");
+  }
+}
+
 export default class ProductData {
+  constructor(category) {
+    this.category = category;
+    this.path = `../json/${this.category}.json`;
+  }
   async getData(category) {
-    const response = await fetch(`/json/${category}.json`);
-    const data = await response.json();
+    const response = await fetch(`${baseURL}products/search/${category}`);
+    const data = await convertToJson(response);    
     return data.Result;
   }
   async findProductById(id) {
-    const categories = ["tents", "backpacks", "sleeping-bags", "hammocks"];
-    for (const category of categories) {
-      const response = await fetch(`/json/${category}.json`);
-      const data = await response.json();
-      const found = data.find(product => product.Id === id);
-      if (found) return found;
-    }
-    return null;
+    const response = await fetch(`${baseURL}product/${id}`);
+    const data = await response.json();
+    return data.Result;
   }
 }

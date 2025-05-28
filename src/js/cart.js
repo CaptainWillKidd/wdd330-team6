@@ -3,7 +3,7 @@ import { updateCartNumber } from "./ProductDetails.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
-  const productList = document.querySelector(".product-list");
+  const productList = document.querySelector(".cart-list");
   if (!cartItems.length) {
     productList.innerHTML = "<li>Your Shopping Cart is Empty.</li>";
     displayTotalPrice(0);
@@ -43,7 +43,7 @@ function cartItemTemplate(item, index) {
   return `
     <li class="cart-card divider">
       <a href="#" class="cart-card__image">
-        <img src="${item.Image || item.Images?.PrimaryMedium}" alt="${item.Name}" />
+        <img src="${item.Images.PrimarySmall}" alt="${item.Name}" />
       </a>
       <a href="#">
         <h2 class="card__name">${item.Name}</h2>

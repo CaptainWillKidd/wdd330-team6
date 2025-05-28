@@ -1,11 +1,12 @@
 import { getParam, getLocalStorage, setLocalStorage } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
-import ProductDetails from "./ProductDetails.mjs";
+import { updateCartNumber, ProductDetails } from "./ProductDetails.mjs";
 import Alert from './Alert.mjs';
 
-import { updateCartNumber } from "./ProductDetails.mjs";
+const category = getParam("category")
 
-const dataSource = new ProductData();
+const dataSource = new ProductData(`${category}`);
+
 const productID = getParam("product");
 
 const product = new ProductDetails(productID, dataSource);
@@ -23,5 +24,9 @@ async function addToCartHandler(e) {
 // add listener to Add to Cart button
 document
   .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler)
+  .addEventListener("click", addToCartHandler);
+
+const productPage = new ProductDetails(productId, dataSource);
+productPage.init();
+
 updateCartNumber();
