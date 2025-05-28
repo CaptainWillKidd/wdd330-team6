@@ -1,7 +1,14 @@
 [
-    {
-        "message": "Succesfully added to the cart!",
-        "background": "green",
-        "color": "white"
-    }
+  {
+    "type": "add",
+    "message": "Item added to the cart!",
+    "background": "green",
+    "color": "white"
+  },
+  {
+    "type": "increment",
+    "message": "One more added to your cart!",
+    "background": "blue",
+    "color": "white"
+  }
 ]

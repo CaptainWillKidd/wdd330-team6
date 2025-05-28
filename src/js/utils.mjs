@@ -66,3 +66,10 @@ export async function loadHeaderFooter(){
 
   renderWithTemplate(footerTemplate, footerElement);
 }
+
+export async function getAlertMessage(type) {
+  const response = await fetch('/json/alerts.json');
+  const alerts = await response.json();
+  const alert = alerts.find(a => a.type === type);
+  return alert || { message: "Unknown alert", background: "red", color: "white" };
+}

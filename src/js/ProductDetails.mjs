@@ -1,30 +1,55 @@
 // productDetails.mjs
-import { getLocalStorage, setLocalStorage } from './utils.mjs';
+import { getLocalStorage, setLocalStorage, getAlertMessage } from './utils.mjs';
+import Alert from './Alert.mjs';
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
     this.product = {};
-    this.dataSource = dataSource; 
+    this.dataSource = dataSource;
   }
 
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
-    
+
     this.renderProductDetails();
 
     document.getElementById('addToCart')
       .addEventListener('click', this.addProductToCart.bind(this));
   }
 
-  addProductToCart() {
-    const cartItems = getLocalStorage("so-cart") || [];
-    cartItems.push(this.product);
+  async addProductToCart() {
+    let cartItems = getLocalStorage("so-cart") || [];
+    const existingIndex = cartItems.findIndex(item => item.Id === this.product.Id);
+    let alertType = "";
+    if (existingIndex > -1) {
+      cartItems[existingIndex].quantity = (cartItems[existingIndex].quantity || 1) + 1;
+      alertType = "increment";
+    } else {
+      const productToAdd = { ...this.product, quantity: 1 };
+      cartItems.push(productToAdd);
+      alertType = "add";
+    }
     setLocalStorage("so-cart", cartItems);
+    updateCartNumber();
+    displayTotalPrice(cartItems.reduce((acc, item) => acc + item.FinalPrice * (item.quantity || 1), 0));
+
+    const alertData = await getAlertMessage(alertType);
+    new Alert(alertData.message || "Unknown alert", alertData.background || "green", alertData.color || "white");
   }
 
   renderProductDetails() {
     productDetailsTemplate(this.product);
+  }
+
+}
+
+export function updateCartNumber() {
+  const cartItems = getLocalStorage("so-cart") || [];
+  const cartCountElement = document.querySelector('.cart-count');
+  //Add a superscript number of items in the cart to the backpack icon according to the number of items in the cart
+  if (cartCountElement) {
+    cartCountElement.textContent = cartItems.length;
   }
 }
 
@@ -50,10 +75,17 @@ function productDetailsTemplate(product) {
     finalPrice.className = "discounted-price";
     finalPrice.textContent = `$${product.FinalPrice.toFixed(2)}`;
 
-    // Append both prices to the container
+    // Create amount saved flag
+    const amountSaved = product.SuggestedRetailPrice - product.FinalPrice;
+    const discountFlag = document.createElement("span");
+    discountFlag.className = "discount-flag";
+    discountFlag.textContent = `Save $${amountSaved.toFixed(2)}!`;
+
+    // Append prices and flag to the container
     productPriceContainer.innerHTML = "";
     productPriceContainer.appendChild(originalPrice);
     productPriceContainer.appendChild(finalPrice);
+    productPriceContainer.appendChild(discountFlag);
   } else {
     productPriceContainer.textContent = `$${product.FinalPrice.toFixed(2)}`;
   }

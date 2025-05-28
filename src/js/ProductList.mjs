@@ -13,7 +13,6 @@ function productCardTemplate(product) {
   `;
 }
 
-
 export default class ProductList {
   constructor(category, dataSource, listElement) {
     this.category = category;
@@ -41,14 +40,11 @@ export default class ProductList {
         list.sort((a, b) => a.Name.localeCompare(b.Name));
         break;
     }
-
+    
     this.renderList(list);
   }
 
   renderList(list) {
-    // const htmlStrings = list.map(productCardTemplate);
-    // this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
-
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
 }
