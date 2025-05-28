@@ -1,6 +1,6 @@
 import { getParam, getLocalStorage, setLocalStorage } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
-import { updateCartNumber, ProductDetails } from "./ProductDetails.mjs";
+import ProductDetails, { updateCartNumber} from "./ProductDetails.mjs";
 import Alert from './Alert.mjs';
 
 const category = getParam("category")
