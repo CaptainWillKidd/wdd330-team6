@@ -26,9 +26,34 @@
     <div class="cart-footer">
       <p class="cart-total">Total: <span id="cart-total"></span></p>
     </div>
+    <a href="/checkout/index.html" class="checkout-btn">Proceed to Checkout</a>
   </main>
 
   <footer>&copy;NOT a real business</footer>
 </body>
+
+<script type="module">
+  import CheckoutProcess from "../js/CheckoutProcess.mjs";
+
+  const checkout = new CheckoutProcess();
+  checkout.displayOrderSummary();
+
+  const form = document.querySelector("form");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    try {
+      const result = await checkout.checkout(form);
+      alert("Order submitted! " + JSON.stringify(result));
+      localStorage.removeItem("so-cart");
+      window.location.href = "/";
+    } catch (err) {
+      alert("Order failed: " + err.message);
+    }
+  });
+</script>
 
 </html>
