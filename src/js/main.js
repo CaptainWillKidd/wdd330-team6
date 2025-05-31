@@ -1,18 +1,18 @@
-import { loadHeaderFooter } from './utils.mjs';
-loadHeaderFooter();
-
+import { loadHeaderFooter, getLocalStorage } from './utils.mjs';
 import ExternalServices from './ExternalServices.mjs';
-
-const dataSource = new ExternalServices('tents');
 import ProductList from './ProductList.mjs';
-
-import { getLocalStorage } from './utils.mjs';
-
 import { updateCartNumber } from "./ProductDetails.mjs";
 
-const productListElement = document.querySelector('.product-list'); // or your specific selector
-const tentList = new ProductList('tents', dataSource, productListElement);
-tentList.init();
+document.addEventListener('DOMContentLoaded', () => {
+  loadHeaderFooter();
+
+  const dataSource = new ExternalServices('tents');
+  const productListElement = document.querySelector('.product-list'); // or your specific selector
+  const tentList = new ProductList('tents', dataSource, productListElement);
+  tentList.init();
+
+  updateCartNumber();
+});
 
 /*function updateCartNumber() {
     const cartItems = getLocalStorage("so-cart") || [];
@@ -22,5 +22,3 @@ tentList.init();
         cartCountElement.textContent = cartItems.length;
     }
 }*/
-
-updateCartNumber();
