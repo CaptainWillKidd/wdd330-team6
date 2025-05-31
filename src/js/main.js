@@ -14,6 +14,25 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCartNumber();
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+  if (!localStorage.getItem("registerBannerShown")) {
+    document.getElementById("register-banner").style.display = "flex";
+    document.getElementById("close-banner").onclick = function() {
+      document.getElementById("register-banner").style.display = "none";
+      localStorage.setItem("registerBannerShown", "true");
+    };
+    // Also hide banner and set localStorage when clicking Register Now
+    const registerBtn = document.querySelector(".register-btn");
+    if (registerBtn) {
+      registerBtn.addEventListener("click", function() {
+        document.getElementById("register-banner").style.display = "none";
+        localStorage.setItem("registerBannerShown", "true");
+        // The link will still redirect to /register.html
+      });
+    }
+  }
+});
+
 /*function updateCartNumber() {
     const cartItems = getLocalStorage("so-cart") || [];
     const cartCountElement = document.querySelector('.cart-count');
