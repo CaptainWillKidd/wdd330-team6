@@ -49,7 +49,11 @@ export function updateCartNumber() {
   const cartCountElement = document.querySelector('.cart-count');
   //Add a superscript number of items in the cart to the backpack icon according to the number of items in the cart
   if (cartCountElement) {
-    cartCountElement.textContent = cartItems.length;
+    let counter = 0;
+    cartItems.forEach(product => {
+      counter += product.quantity;
+    });
+    cartCountElement.textContent = counter;
   }
 }
 
