@@ -54,7 +54,6 @@ export default class CheckoutProcess {
       order[key] = value;
     }
 
-    // Adiciona os campos do pedido
     const subtotal = this.calculateSubtotal();
     const tax = this.calculateTax(subtotal);
     const shipping = this.calculateShipping();
@@ -66,8 +65,12 @@ export default class CheckoutProcess {
     order.shipping = shipping;
     order.items = this.packageItems(this.cartItems);
 
-    // Envia para o servidor
-    const response = await ExternalServices.checkout(order);
-    return response;
+    try {
+      const response = await ExternalServices.checkout(order);
+      return response;
+    } catch (err) {
+      console.error("Checkout failed:", err.message);
+      throw err;
+    }
   }
 }

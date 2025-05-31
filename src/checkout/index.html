@@ -22,8 +22,8 @@
       <p class="cart-total">Total: <span id="cart-total"></span></p>
     </div>
 
-    <form method="get">
-      <fieldset id="ps-info">
+    <form id="checkout-form" method="post">
+      <fieldset>
         <legend>Personal Information</legend>
         <label for="fname">First Name</label>
         <input type="text" id="fname" name="fname" placeholder="First Name" required>
@@ -62,13 +62,14 @@
 
   </main>
   <footer id="main-footer">&copy;2025 ⛺ SleepOutside ⛺ WDD 330 ⛺ BYU-Idaho for BYU-Pathway Worldwide Online</footer>
+
   <script type="module">
     import CheckoutProcess from "../js/CheckoutProcess.mjs";
 
     const checkout = new CheckoutProcess();
     checkout.displayOrderSummary();
 
-    const form = document.querySelector("form");
+    const form = document.getElementById("checkout-form");
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!form.checkValidity()) {
