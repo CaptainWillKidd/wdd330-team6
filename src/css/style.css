@@ -313,6 +313,7 @@ button {
   font-size: var(--large-font);
   cursor: pointer;
   width: fit-content;
+  text-decoration: none;
 }
 
 /* Start cart list card styles */
