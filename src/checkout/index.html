@@ -13,7 +13,7 @@
 <body>
   <header id="main-header" class="divider"></header>
   <main class="divider">
-    
+
     <div id="total">
       <h2>Checkout</h2>
       <p class="cart-subtotal">Subtotal: <span id="cart-subtotal"></span></p>
@@ -44,10 +44,11 @@
         <input type="text" inputmode="numeric" id="zip" name="zip" placeholder="Zip Code" required>
       </fieldset>
 
-      <fieldset>
+      <fieldset id="pm-info">
         <legend>Payment Information</legend>
-        <label for="cardnumber">Card Number</label>
-        <input type="text" inputmode="numeric" id="cardnumber" name="cardnumber" placeholder="1234-5678-9012-3456" required>
+        <label for="cardnumber" class="card-number">Card Number</label>
+        <input type="text" inputmode="numeric" id="cardnumber" name="cardnumber" placeholder="1234-5678-9012-3456"
+          required>
 
         <label for="expmonth">Expiration Date</label>
         <input type="month" id="expdate" name="expdate" placeholder="month and year" required>
@@ -86,4 +87,5 @@
     });
   </script>
 </body>
+
 </html>
