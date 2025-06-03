@@ -22,6 +22,59 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
+export function updateBreadcrumb() {
+  const breadcrumb = document.querySelector("#breadcrumbs");
+  if (!breadcrumb) return;
+
+  const path = window.location.pathname; 
+  const segments = path.split('/').filter(Boolean);
+  
+  
+  breadcrumb.innerHTML = '';
+
+  if (segments[0] == "product_listing") {
+    let category = getParam("category");
+
+    category = category.charAt(0).toUpperCase() + category.slice(1)
+
+    const home = document.createElement('span');
+    home.textContent = ' Home > ';
+    breadcrumb.appendChild(home);
+
+    const products = document.createElement("span");
+    products.textContent = " " + category + " > " + document.querySelectorAll(".product-card").length + " Items";
+    breadcrumb.appendChild(products); 
+
+  } else if (segments[0] == "product_pages") {
+
+    const home = document.createElement('span');
+    home.textContent = ' Home > ';
+    breadcrumb.appendChild(home);
+
+    const products = document.createElement("span");
+    products.textContent = "Product Category";
+    breadcrumb.appendChild(products); 
+  } else if (segments[0] == "cart") {
+    const home = document.createElement('span');
+    home.textContent = ' Home > ';
+    breadcrumb.appendChild(home);
+
+    const products = document.createElement("span");
+    products.textContent = "Cart";
+    breadcrumb.appendChild(products); 
+  } else if (segments[0] == "checkout") {
+    const home = document.createElement('span');
+    home.textContent = ' Home > ';
+    breadcrumb.appendChild(home);
+
+    const products = document.createElement("span");
+    products.textContent = "Checkout";
+    breadcrumb.appendChild(products); 
+  }
+
+}
+
+
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);

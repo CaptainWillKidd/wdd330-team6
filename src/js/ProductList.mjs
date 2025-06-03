@@ -1,4 +1,4 @@
-import { renderListWithTemplate } from './utils.mjs';
+import { renderListWithTemplate, updateBreadcrumb } from './utils.mjs';
 
 function productCardTemplate(product) {
   return `
@@ -46,5 +46,6 @@ export default class ProductList {
 
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
+    updateBreadcrumb();
   }
 }

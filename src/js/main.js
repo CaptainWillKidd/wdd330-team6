@@ -8,6 +8,11 @@ import ProductList from './ProductList.mjs';
 
 import { getLocalStorage } from './utils.mjs';
 
+import { updateBreadcrumb } from './utils.mjs';
+document.addEventListener("DOMContentLoaded", () => {
+    updateBreadcrumb()
+});
+
 import { updateCartNumber } from "./ProductDetails.mjs";
 
 const productListElement = document.querySelector('.product-list'); // or your specific selector
