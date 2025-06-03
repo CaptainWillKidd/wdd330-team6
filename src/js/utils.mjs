@@ -1,3 +1,5 @@
+import { updateCartNumber } from "./ProductDetails.mjs";
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -55,13 +57,13 @@ export function renderWithTemplate(template, parentElement, data, callback) {
   }
 }
 
-async function loadTemplate(path){
+async function loadTemplate(path) {
   const res = await fetch(path);
   const template = await res.text();
-  return template; 
+  return template;
 }
 
-export async function loadHeaderFooter(){
+export async function loadHeaderFooter() {
   const headerTemplate = await loadTemplate("../partials/header.html");
 
   const headerElement = document.querySelector("#main-header");
@@ -73,6 +75,8 @@ export async function loadHeaderFooter(){
   const footerElement = document.querySelector("#main-footer");
 
   renderWithTemplate(footerTemplate, footerElement);
+
+  updateCartNumber();
 }
 
 export async function getAlertMessage(type) {
