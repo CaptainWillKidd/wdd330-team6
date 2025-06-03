@@ -191,7 +191,7 @@ button {
   padding: 1rem;
 }
 
-.products > div:nth-child(1){
+.products>div:nth-child(1) {
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
@@ -204,18 +204,20 @@ button {
   height: 30px;
 }
 
-#sortFilter{
+#sortFilter {
   border: none;
 }
 
-.product-list, .cart-list {
+.product-list,
+.cart-list {
   display: flex;
   flex-flow: row wrap;
   list-style-type: none;
   justify-content: center;
 }
 
-.product-list a, .cart-list a {
+.product-list a,
+.cart-list a {
   text-decoration: none;
   color: var(--dark-grey);
 }
@@ -292,9 +294,26 @@ button {
 .discount-flag {
   display: block;
   font-size: 1rem;
-  color: #27ae60; /* Green to indicate savings */
+  color: #27ae60;
+  /* Green to indicate savings */
   font-weight: bold;
   margin-top: 5px;
+}
+
+/**/
+
+.checkout-btn {
+  padding: 0.5em 2em;
+  background-color: var(--secondary-color);
+  color: white;
+  margin: 0 auto 10px auto;
+  border-radius: 5px;
+  display: block;
+  border: 0;
+  font-size: var(--large-font);
+  cursor: pointer;
+  width: fit-content;
+  text-decoration: none;
 }
 
 /* Start cart list card styles */
@@ -333,6 +352,83 @@ button {
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+}
+
+/*Checkout page*/
+#total {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#total .cart-subtotal,
+#total .cart-tax,
+#total .cart-shipping,
+#total .cart-total {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+#total h2 {
+  text-align: center;
+  padding: 5px;
+  font-family: var(--font-body);
+  font-size: 1.5em;
+  flex-basis: 100%;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+#ps-info,
+#pm-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 5px 10px 10px 10px;
+  margin: 5px;
+  grid-gap: 5px;
+  border: solid #888 2px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-family: var(--font-body);
+}
+
+#pm-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#pm-info label {
+  padding: 5px 5px 5px 50px;
+}
+
+#pm-info .card-number {
+  padding: 5px;
+}
+
+#ps-info legend,
+#pm-info legend {
+  letter-spacing: -0.5px;
+}
+
+#ps-info input,
+#pm-info input {
+  padding: 5px;
+  border: solid #afafaf 2px;
+  border-radius: 5px;
+}
+
+#ps-info label,
+#pm-info label {
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+form [type=submit] {
+  margin: 3rem;
+  justify-self: center;
+  border-radius: 5px;
 }
 
 @media screen and (min-width: 500px) {
@@ -380,4 +476,49 @@ footer {
 .category-card img {
   width: 100px;
   height: 100px;
+}
+
+.register-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.register-banner-content {
+  background: #fff;
+  padding: 2em;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 90vw;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.register-btn {
+  display: inline-block;
+  margin-top: 1em;
+  padding: 0.5em 2em;
+  background: #525b0f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+#close-banner {
+  margin-top: 1em;
+  background: #f44336;
+  color: #fff;
+  border: none;
+  padding: 0.5em 2em;
+  border-radius: 4px;
+  cursor: pointer;
 }

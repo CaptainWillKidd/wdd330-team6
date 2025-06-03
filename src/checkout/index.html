@@ -14,7 +14,7 @@
   <header id="main-header" class="divider"></header>
   <p id="breadcrumbs"></p>
   <main class="divider">
-    
+
     <div id="total">
       <h2>Checkout</h2>
       <p class="cart-subtotal">Subtotal: <span id="cart-subtotal"></span></p>
@@ -23,7 +23,7 @@
       <p class="cart-total">Total: <span id="cart-total"></span></p>
     </div>
 
-    <form method="get">
+    <form id="checkout-form" method="post">
       <fieldset>
         <legend>Personal Information</legend>
         <label for="fname">First Name</label>
@@ -45,10 +45,11 @@
         <input type="text" inputmode="numeric" id="zip" name="zip" placeholder="Zip Code" required>
       </fieldset>
 
-      <fieldset>
+      <fieldset id="pm-info">
         <legend>Payment Information</legend>
-        <label for="cardnumber">Card Number</label>
-        <input type="text" inputmode="numeric" id="cardnumber" name="cardnumber" placeholder="1234-5678-9012-3456" required>
+        <label for="cardnumber" class="card-number">Card Number</label>
+        <input type="text" inputmode="numeric" id="cardnumber" name="cardnumber" placeholder="1234-5678-9012-3456"
+          required>
 
         <label for="expmonth">Expiration Date</label>
         <input type="month" id="expdate" name="expdate" placeholder="month and year" required>
@@ -62,5 +63,30 @@
 
   </main>
   <footer id="main-footer">&copy;2025 ⛺ SleepOutside ⛺ WDD 330 ⛺ BYU-Idaho for BYU-Pathway Worldwide Online</footer>
+
+  <script type="module">
+    import CheckoutProcess from "../js/CheckoutProcess.mjs";
+
+    const checkout = new CheckoutProcess();
+    checkout.displayOrderSummary();
+
+    const form = document.getElementById("checkout-form");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      try {
+        const result = await checkout.checkout(form);
+        alert("Order submitted! " + JSON.stringify(result));
+        localStorage.removeItem("so-cart");
+        window.location.href = "/";
+      } catch (err) {
+        alert("Order failed: " + err.message);
+      }
+    });
+  </script>
 </body>
+
 </html>
