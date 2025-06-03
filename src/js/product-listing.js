@@ -2,6 +2,11 @@ import ExternalServices from './ExternalServices.mjs';
 import ProductList from './ProductList.mjs';
 import { getParam, loadHeaderFooter } from './utils.mjs';
 
+import { updateBreadcrumb } from './utils.mjs';
+document.addEventListener("DOMContentLoaded", () => {
+    updateBreadcrumb();
+});
+
 loadHeaderFooter();
 
 const category = getParam("category");

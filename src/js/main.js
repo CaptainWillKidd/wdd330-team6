@@ -6,6 +6,12 @@ import { updateCartNumber } from "./ProductDetails.mjs";
 document.addEventListener('DOMContentLoaded', () => {
   loadHeaderFooter();
 
+import { updateBreadcrumb } from './utils.mjs';
+document.addEventListener("DOMContentLoaded", () => {
+    updateBreadcrumb()
+});
+
+import { updateCartNumber } from "./ProductDetails.mjs";
   const dataSource = new ExternalServices('tents');
   const productListElement = document.querySelector('.product-list'); // or your specific selector
   const tentList = new ProductList('tents', dataSource, productListElement);
