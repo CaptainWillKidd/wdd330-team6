@@ -1,18 +1,43 @@
-import { loadHeaderFooter } from './utils.mjs';
-loadHeaderFooter();
-
-import ProductData from './ProductData.mjs';
-
-const dataSource = new ProductData('tents');
+import { loadHeaderFooter, getLocalStorage } from './utils.mjs';
+import ExternalServices from './ExternalServices.mjs';
 import ProductList from './ProductList.mjs';
-
-import { getLocalStorage } from './utils.mjs';
-
 import { updateCartNumber } from "./ProductDetails.mjs";
 
-const productListElement = document.querySelector('.product-list'); // or your specific selector
-const tentList = new ProductList('tents', dataSource, productListElement);
-tentList.init();
+document.addEventListener('DOMContentLoaded', () => {
+  loadHeaderFooter();
+
+import { updateBreadcrumb } from './utils.mjs';
+document.addEventListener("DOMContentLoaded", () => {
+    updateBreadcrumb()
+});
+
+import { updateCartNumber } from "./ProductDetails.mjs";
+  const dataSource = new ExternalServices('tents');
+  const productListElement = document.querySelector('.product-list'); // or your specific selector
+  const tentList = new ProductList('tents', dataSource, productListElement);
+  tentList.init();
+
+  updateCartNumber();
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  if (!localStorage.getItem("registerBannerShown")) {
+    document.getElementById("register-banner").style.display = "flex";
+    document.getElementById("close-banner").onclick = function() {
+      document.getElementById("register-banner").style.display = "none";
+      localStorage.setItem("registerBannerShown", "true");
+    };
+    // Also hide banner and set localStorage when clicking Register Now
+    const registerBtn = document.querySelector(".register-btn");
+    if (registerBtn) {
+      registerBtn.addEventListener("click", function() {
+        document.getElementById("register-banner").style.display = "none";
+        localStorage.setItem("registerBannerShown", "true");
+        // The link will still redirect to /register.html
+      });
+    }
+  }
+});
 
 /*function updateCartNumber() {
     const cartItems = getLocalStorage("so-cart") || [];
@@ -22,5 +47,3 @@ tentList.init();
         cartCountElement.textContent = cartItems.length;
     }
 }*/
-
-updateCartNumber();
