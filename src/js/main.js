@@ -1,4 +1,4 @@
-import { loadHeaderFooter, getLocalStorage } from './utils.mjs';
+import { loadHeaderFooter, getLocalStorage, updateBreadcrumb } from './utils.mjs';
 import ExternalServices from './ExternalServices.mjs';
 import ProductList from './ProductList.mjs';
 import { updateCartNumber } from "./ProductDetails.mjs";
@@ -6,18 +6,17 @@ import { updateCartNumber } from "./ProductDetails.mjs";
 document.addEventListener('DOMContentLoaded', () => {
   loadHeaderFooter();
 
-import { updateBreadcrumb } from './utils.mjs';
-document.addEventListener("DOMContentLoaded", () => {
-    updateBreadcrumb()
-});
-
-import { updateCartNumber } from "./ProductDetails.mjs";
   const dataSource = new ExternalServices('tents');
   const productListElement = document.querySelector('.product-list'); // or your specific selector
   const tentList = new ProductList('tents', dataSource, productListElement);
   tentList.init();
 
   updateCartNumber();
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateBreadcrumb()
 });
 
 document.addEventListener("DOMContentLoaded", function() {
