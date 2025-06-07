@@ -1,0 +1,1 @@
+// Handles local storage functionality
