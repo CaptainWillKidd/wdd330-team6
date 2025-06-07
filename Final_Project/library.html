@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Library</title>
-    <link rel="stylesheet" href="styles/style.css">
+  <meta charset="UTF-8" />
+  <title>Your Library</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="styles/style.css" />
 </head>
 <body>
-    <header><h1>Your Library</h1></header>
-    <main id="library"></main>
-    <script src="scripts/library.js"></script>
+  <header>
+    <h1>Your Watch/Read List</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="search.html">Search</a>
+      <a href="library.html">Library</a>
+    </nav>
+  </header>
+
+  <main id="libraryContainer">
+    <!-- Local storage content will load here -->
+  </main>
+
+  <script src="scripts/library.js"></script>
 </body>
 </html>

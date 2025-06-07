@@ -1,7 +1,45 @@
 body {
-    font-family: 'Roboto', sans-serif;
-    background: #ecf0f1;
-    color: #2c3e50;
-    margin: 0;
-    padding: 0;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ecf0f1;
+  color: #2c3e50;
+}
+
+header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+
+nav a {
+  margin: 0 1em;
+  color: #ff6f61;
+  text-decoration: none;
+}
+
+main {
+  padding: 1em;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+.card {
+  background: white;
+  padding: 1em;
+  border-radius: 10px;
+  width: calc(33% - 2em);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
 }

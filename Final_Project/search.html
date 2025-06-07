@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Search</title>
-    <link rel="stylesheet" href="styles/style.css">
+  <meta charset="UTF-8" />
+  <title>Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="styles/style.css" />
 </head>
 <body>
-    <header><h1>Search</h1></header>
-    <main id="search-results"></main>
-    <script src="scripts/api.js"></script>
+  <header>
+    <h1>Search Anime/Manga</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="search.html">Search</a>
+      <a href="library.html">Library</a>
+    </nav>
+  </header>
+
+  <main>
+    <input type="text" id="searchBar" placeholder="Search by title..." />
+    <button id="searchBtn">Search</button>
+    <section id="searchResults" class="card-container"></section>
+  </main>
+
+  <script src="scripts/api.js"></script>
 </body>
 </html>
