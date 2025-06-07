@@ -4,7 +4,7 @@ function productCardTemplate(product) {
   return `
     <li class="product-card">
       <a href="../product_pages/?product=${product.Id}">
-        <img src="${product.Images.PrimaryMedium}" alt="Imagem de ${product.Name}">
+        <img class="product-image" src="${product.Images.PrimaryMedium}" alt="Imagem de ${product.Name}">
         <h2 class="card__brand">${product.Brand.Id} - ${product.Brand.Name}</h2>
         <h3 class="card__name">${product.Name}</h3>
         <p class="product-card__price">$${product.FinalPrice.toFixed(2)}</p>
@@ -16,10 +16,10 @@ function productCardTemplate(product) {
 export default class ProductList {
   constructor(category, dataSource, listElement) {
     this.category = category;
-    this.dataSource  = dataSource;
+    this.dataSource = dataSource;
     this.listElement = listElement;
   }
-  
+
   async init(sortValue) {
     const list = await this.dataSource.getData(this.category);
 
@@ -40,7 +40,7 @@ export default class ProductList {
         list.sort((a, b) => a.Name.localeCompare(b.Name));
         break;
     }
-    
+
     this.renderList(list);
   }
 
