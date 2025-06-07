@@ -34,6 +34,8 @@ export default class ProductDetails {
     updateCartNumber();
     displayTotalPrice(cartItems.reduce((acc, item) => acc + item.FinalPrice * (item.quantity || 1), 0));
 
+    this.triggerCartAnimation();
+
     const alertData = await getAlertMessage(alertType);
     new Alert(alertData.message || "Unknown alert", alertData.background || "green", alertData.color || "white");
   }
@@ -42,6 +44,20 @@ export default class ProductDetails {
     productDetailsTemplate(this.product);
   }
 
+  triggerCartAnimation() {
+    const cartCount = document.querySelector('.cart-count');
+
+    console.log("Elemento .cart-count encontrado:", cartCount);
+    cartCount.removeAttribute('id');
+    void cartCount.offsetWidth;  // reset de animação
+    cartCount.setAttribute('id', 'animate');
+    console.log("ID 'animate' aplicado");
+
+    setTimeout(() => {
+      cartCount.removeAttribute('id');
+      console.log("ID 'animate' removido");
+    }, 500);
+  }
 }
 
 export function updateCartNumber() {

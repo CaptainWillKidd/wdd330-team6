@@ -1,3 +1,6 @@
+//import updateCartNumber
+import { updateCartNumber } from "./ProductDetails.mjs";
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -35,10 +38,10 @@ export function updateBreadcrumb() {
   const breadcrumb = document.querySelector("#breadcrumbs");
   if (!breadcrumb) return;
 
-  const path = window.location.pathname; 
+  const path = window.location.pathname;
   const segments = path.split('/').filter(Boolean);
-  
-  
+
+
   breadcrumb.innerHTML = '';
 
   if (segments[0] == "product_listing") {
@@ -52,7 +55,7 @@ export function updateBreadcrumb() {
 
     const products = document.createElement("span");
     products.textContent = " " + category + " > " + document.querySelectorAll(".product-card").length + " Items";
-    breadcrumb.appendChild(products); 
+    breadcrumb.appendChild(products);
 
   } else if (segments[0] == "product_pages") {
 
@@ -62,7 +65,7 @@ export function updateBreadcrumb() {
 
     const products = document.createElement("span");
     products.textContent = "Product Category";
-    breadcrumb.appendChild(products); 
+    breadcrumb.appendChild(products);
   } else if (segments[0] == "cart") {
     const home = document.createElement('span');
     home.textContent = ' Home > ';
@@ -70,7 +73,7 @@ export function updateBreadcrumb() {
 
     const products = document.createElement("span");
     products.textContent = "Cart";
-    breadcrumb.appendChild(products); 
+    breadcrumb.appendChild(products);
   } else if (segments[0] == "checkout") {
     const home = document.createElement('span');
     home.textContent = ' Home > ';
@@ -78,7 +81,7 @@ export function updateBreadcrumb() {
 
     const products = document.createElement("span");
     products.textContent = "Checkout";
-    breadcrumb.appendChild(products); 
+    breadcrumb.appendChild(products);
   }
 
 }
@@ -108,13 +111,13 @@ export function renderWithTemplate(template, parentElement, data, callback) {
   }
 }
 
-async function loadTemplate(path){
+async function loadTemplate(path) {
   const res = await fetch(path);
   const template = await res.text();
-  return template; 
+  return template;
 }
 
-export async function loadHeaderFooter(){
+export async function loadHeaderFooter() {
   const headerTemplate = await loadTemplate("../partials/header.html");
 
   const headerElement = document.querySelector("#main-header");
@@ -126,6 +129,8 @@ export async function loadHeaderFooter(){
   const footerElement = document.querySelector("#main-footer");
 
   renderWithTemplate(footerTemplate, footerElement);
+
+  updateCartNumber();
 }
 
 export async function getAlertMessage(type) {

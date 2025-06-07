@@ -149,6 +149,70 @@ button {
   transform: translate(20%, -2%);
 }
 
+/*Animating the cart icon*/
+#animate {
+  animation: pulse 2s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: var(--primary-color);
+  }
+
+  50% {
+    background-color: black;
+  }
+
+  100% {
+    background-color: var(--primary-color);
+  }
+}
+
+/*Change the image size according to the screen size*/
+.product-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
+
+@media (min-width: 600px) {
+  .product-image {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-image {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+.product-image-self {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
+
+@media (min-width: 600px) {
+  .product-image-self {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+@media (min-width: 900px) {
+  .product-image-self {
+    width: 400px;
+    height: 400px;
+  }
+}
+
 /* End cart icon styles */
 
 .mission {
