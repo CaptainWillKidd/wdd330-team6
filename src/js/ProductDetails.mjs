@@ -9,6 +9,20 @@ export default class ProductDetails {
     this.dataSource = dataSource;
   }
 
+  triggerCartAnimation() {
+    console.log("Disparando animação...");
+    const cart = document.querySelector('.cart');
+    if (cart) {
+      cart.classList.add("animate");
+      console.log("Classe .animate adicionada!");
+
+      setTimeout(() => {
+        cart.classList.remove("animate");
+        console.log("Classe .animate removida após 2s!");
+      }, 400);
+    }
+  }
+
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
 
@@ -32,9 +46,9 @@ export default class ProductDetails {
     }
     setLocalStorage("so-cart", cartItems);
     updateCartNumber();
-    displayTotalPrice(cartItems.reduce((acc, item) => acc + item.FinalPrice * (item.quantity || 1), 0));
-
     this.triggerCartAnimation();
+
+    displayTotalPrice(cartItems.reduce((acc, item) => acc + item.FinalPrice * (item.quantity || 1), 0));
 
     const alertData = await getAlertMessage(alertType);
     new Alert(alertData.message || "Unknown alert", alertData.background || "green", alertData.color || "white");
@@ -44,20 +58,6 @@ export default class ProductDetails {
     productDetailsTemplate(this.product);
   }
 
-  triggerCartAnimation() {
-    const cartCount = document.querySelector('.cart-count');
-
-    console.log("Elemento .cart-count encontrado:", cartCount);
-    cartCount.removeAttribute('id');
-    void cartCount.offsetWidth;  // reset de animação
-    cartCount.setAttribute('id', 'animate');
-    console.log("ID 'animate' aplicado");
-
-    setTimeout(() => {
-      cartCount.removeAttribute('id');
-      console.log("ID 'animate' removido");
-    }, 500);
-  }
 }
 
 export function updateCartNumber() {

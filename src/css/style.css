@@ -120,10 +120,36 @@ button {
   padding-top: 1em;
   position: relative;
   text-align: center;
+  border: solid 2px var(--primary-color);
+  border-radius: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .cart svg {
   width: 25px;
+}
+
+/*Animating the cart icon*/
+@keyframes change {
+  0% {
+    border: solid 2px var(--primary-color);
+  }
+
+  50% {
+    border: solid 5px var(--primary-color);
+  }
+
+  100% {
+    border: solid 2px var(--primary-color);
+  }
+}
+
+.cart.animate {
+  animation-name: change;
+  animation-duration: 0.4s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
 }
 
 .cart:hover svg {
@@ -147,25 +173,6 @@ button {
   padding: 2px 7px 1px 7px;
   border-radius: 50%;
   transform: translate(20%, -2%);
-}
-
-/*Animating the cart icon*/
-#animate {
-  animation: pulse 2s ease-in-out;
-}
-
-@keyframes pulse {
-  0% {
-    background-color: var(--primary-color);
-  }
-
-  50% {
-    background-color: black;
-  }
-
-  100% {
-    background-color: var(--primary-color);
-  }
 }
 
 /*Change the image size according to the screen size*/
