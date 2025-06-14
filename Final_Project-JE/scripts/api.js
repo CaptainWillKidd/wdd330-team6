@@ -30,16 +30,24 @@ async function loadTopAnime() {
       const card = document.createElement('div');
       card.classList.add('card');
 
-      card.innerHTML = `
-        <img src="${anime.images.jpg.image_url}" alt="${anime.title}" />
-        <h3>${anime.title}</h3>
-        <p>${anime.synopsis ? anime.synopsis.substring(0, 100) + '...' : 'No description available.'}</p>
-        <button>Add to Library</button>
-      `;
+      const img = document.createElement('img');
+      img.src = anime.images.jpg.image_url;
+      img.alt = anime.title;
 
-      card.querySelector('button').addEventListener('click', () => {
-        addToLibrary(anime);
-      });
+      const title = document.createElement('h3');
+      title.textContent = anime.title;
+
+      const desc = document.createElement('p');
+      desc.textContent = anime.synopsis ? anime.synopsis.substring(0, 100) + '...' : 'No description available.';
+
+      const button = document.createElement('button');
+      button.textContent = 'Add to Library';
+      button.addEventListener('click', () => addToLibrary(anime));
+
+      card.appendChild(img);
+      card.appendChild(title);
+      card.appendChild(desc);
+      card.appendChild(button);
 
       container.appendChild(card);
     });
@@ -112,16 +120,24 @@ async function handleSearch(e) {
       const card = document.createElement('div');
       card.classList.add('card');
 
-      card.innerHTML = `
-        <img src="${anime.images.jpg.image_url}" alt="${anime.title}" />
-        <h3>${anime.title}</h3>
-        <p>${anime.synopsis ? anime.synopsis.substring(0, 100) + '...' : 'No description available.'}</p>
-        <button>Add to Library</button>
-      `;
+      const img = document.createElement('img');
+      img.src = anime.images.jpg.image_url;
+      img.alt = anime.title;
 
-      card.querySelector('button').addEventListener('click', () => {
-        addToLibrary(anime);
-      });
+      const title = document.createElement('h3');
+      title.textContent = anime.title;
+
+      const desc = document.createElement('p');
+      desc.textContent = anime.synopsis ? anime.synopsis.substring(0, 100) + '...' : 'No description available.';
+
+      const button = document.createElement('button');
+      button.textContent = 'Add to Library';
+      button.addEventListener('click', () => addToLibrary(anime));
+
+      card.appendChild(img);
+      card.appendChild(title);
+      card.appendChild(desc);
+      card.appendChild(button);
 
       container.appendChild(card);
     });
