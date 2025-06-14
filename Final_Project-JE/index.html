@@ -9,18 +9,18 @@
 <body>
   <header>
     <h1>Anime/Manga Explorer</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="search.html">Search</a>
-      <a href="library.html">Library</a>
-    </nav>
   </header>
 
   <main>
-    <h2>Trending Anime</h2>
-    <section id="trending" class="card-container"></section>
+    <section>
+      <h2>Top Anime</h2>
+      <div id="anime-list" class="anime-grid"></div>
+    </section>
   </main>
 
-  <script src="scripts/api.js"></script>
+  <script type="module">
+    import { displayTopAnime } from './scripts/api.js';
+    displayTopAnime('#anime-list');
+  </script>
 </body>
 </html>

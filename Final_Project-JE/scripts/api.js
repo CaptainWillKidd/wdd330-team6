@@ -1,19 +1,35 @@
-// Replace with actual API call logic later
-document.addEventListener('DOMContentLoaded', () => {
-  const trending = document.getElementById('trending');
-  const searchBtn = document.getElementById('searchBtn');
+// scripts/api.js
 
-  if (trending) {
-    trending.innerHTML = `<p>Loading trending titles...</p>`;
-    // TODO: Fetch data from Jikan API
-  }
+const API_BASE = 'https://api.jikan.moe/v4';
 
-  if (searchBtn) {
-    searchBtn.addEventListener('click', () => {
-      const query = document.getElementById('searchBar').value;
-      const results = document.getElementById('searchResults');
-      results.innerHTML = `<p>Searching for "${query}"...</p>`;
-      // TODO: Add search API logic
-    });
+// Fetch top anime
+export async function fetchTopAnime(limit = 10) {
+  try {
+    const response = await fetch(`${API_BASE}/top/anime?limit=${limit}`);
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error('Error fetching top anime:', error);
+    return [];
   }
-});
+}
+
+// Display anime on the homepage
+export async function displayTopAnime(containerSelector) {
+  const container = document.querySelector(containerSelector);
+  const animeList = await fetchTopAnime();
+
+  animeList.forEach(anime => {
+    const card = document.createElement('div');
+    card.classList.add('anime-card');
+
+    card.innerHTML = `
+      <img src="${anime.images.jpg.image_url}" alt="${anime.title}">
+      <h3>${anime.title}</h3>
+      <p>Type: ${anime.type}</p>
+      <p>Status: ${anime.status}</p>
+    `;
+
+    container.appendChild(card);
+  });
+}
