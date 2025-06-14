@@ -1,29 +1,45 @@
-import { searchAnime } from './api.js';
-
-document.getElementById('searchBtn').addEventListener('click', async () => {
+document.getElementById('searchButton').addEventListener('click', async () => {
   const query = document.getElementById('searchInput').value.trim();
-  const results = await searchAnime(query);
+  if (!query) return;
 
-  const container = document.getElementById('searchResults');
-  container.innerHTML = '';
+  const response = await fetch(`https://api.jikan.moe/v4/anime?q=${encodeURIComponent(query)}&limit=10`);
+  const data = await response.json();
 
-  results.forEach(anime => {
-    const card = document.createElement('div');
-    card.className = 'anime-card';
-    card.innerHTML = `
-      <img src="${anime.images.jpg.image_url}" alt="${anime.title}">
-      <h3>${anime.title}</h3>
-      <button onclick="addToLibrary(${anime.mal_id}, '${anime.title.replace(/'/g, "\\'")}')">Add</button>
-    `;
-    container.appendChild(card);
-  });
-});
+  const resultsContainer = document.getElementById('results');
+  resultsContainer.innerHTML = '';
 
-window.addToLibrary = function(id, title) {
-  let library = JSON.parse(localStorage.getItem('library')) || [];
-  if (!library.find(item => item.id === id)) {
-    library.push({ id, title });
-    localStorage.setItem('library', JSON.stringify(library));
-    alert(`${title} added to your library!`);
+  if (data.data && data.data.length) {
+    data.data.forEach(anime => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      card.innerHTML = `
+        <img src="${anime.images.jpg.image_url}" alt="${anime.title}" />
+        <h3>${anime.title}</h3>
+        <p>${anime.synopsis ? anime.synopsis.substring(0, 100) + '...' : 'No description available.'}</p>
+        <button data-anime='${JSON.stringify(anime)}'>Add to Library</button>
+      `;
+
+      card.querySelector('button').addEventListener('click', () => {
+        const stored = JSON.parse(localStorage.getItem('library')) || [];
+        const exists = stored.find(item => item.mal_id === anime.mal_id);
+        if (!exists) {
+          stored.push({
+            mal_id: anime.mal_id,
+            title: anime.title,
+            image_url: anime.images.jpg.image_url,
+            synopsis: anime.synopsis
+          });
+          localStorage.setItem('library', JSON.stringify(stored));
+          alert(`${anime.title} added to library.`);
+        } else {
+          alert(`${anime.title} is already in your library.`);
+        }
+      });
+
+      resultsContainer.appendChild(card);
+    });
+  } else {
+    resultsContainer.innerHTML = '<p>No results found.</p>';
   }
-};
+});

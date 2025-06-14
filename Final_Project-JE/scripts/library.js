@@ -1,16 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const library = JSON.parse(localStorage.getItem('library')) || [];
-  const container = document.getElementById('libraryList');
+  const container = document.getElementById('library');
+  const stored = JSON.parse(localStorage.getItem('library')) || [];
 
-  if (library.length === 0) {
-    container.innerHTML = '<p>No anime added yet.</p>';
+  if (stored.length === 0) {
+    container.innerHTML = '<p>Your library is empty. Add some anime from the search page!</p>';
     return;
   }
 
-  library.forEach(item => {
+  stored.forEach(anime => {
     const card = document.createElement('div');
-    card.className = 'anime-card';
-    card.innerHTML = `<h3>${item.title}</h3>`;
+    card.classList.add('card');
+
+    card.innerHTML = `
+      <img src="${anime.image_url}" alt="${anime.title}" />
+      <h3>${anime.title}</h3>
+      <p>${anime.synopsis ? anime.synopsis.substring(0, 100) + '...' : 'No description available.'}</p>
+    `;
+
     container.appendChild(card);
   });
 });

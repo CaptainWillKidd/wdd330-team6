@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Search Anime</title>
+  <title>Search | Anime/Manga Explorer</title>
   <link rel="stylesheet" href="styles/style.css" />
 </head>
 <body>
   <header>
-    <h1>Search Anime</h1>
+    <h1>Anime/Manga Explorer</h1>
     <nav>
       <a href="index.html">Home</a>
       <a href="search.html">Search</a>
@@ -17,11 +17,14 @@
   </header>
 
   <main>
-    <input type="text" id="searchInput" placeholder="Search anime...">
-    <button id="searchBtn">Search</button>
-    <div id="searchResults" class="anime-grid"></div>
+    <section id="search">
+      <input type="text" id="searchInput" placeholder="Search anime..." />
+      <button id="searchButton">Search</button>
+    </section>
+
+    <section id="results" class="card-container"></section>
   </main>
 
-  <script type="module" src="scripts/search.js"></script>
+  <script src="scripts/search.js"></script>
 </body>
 </html>
