@@ -1,35 +1,50 @@
 // scripts/api.js
 
-const API_BASE = 'https://api.jikan.moe/v4';
+const BASE_URL = 'https://api.jikan.moe/v4';
 
-// Fetch top anime
-export async function fetchTopAnime(limit = 10) {
+/**
+ * Fetches top anime to display on the home page
+ * @returns {Promise<Array>} Array of top anime objects
+ */
+export async function getTopAnime() {
   try {
-    const response = await fetch(`${API_BASE}/top/anime?limit=${limit}`);
-    const data = await response.json();
+    const res = await fetch(`${BASE_URL}/top/anime?limit=12`);
+    const data = await res.json();
     return data.data;
   } catch (error) {
-    console.error('Error fetching top anime:', error);
+    console.error('Failed to fetch top anime:', error);
     return [];
   }
 }
 
-// Display anime on the homepage
-export async function displayTopAnime(containerSelector) {
-  const container = document.querySelector(containerSelector);
-  const animeList = await fetchTopAnime();
+/**
+ * Searches for anime based on a user query
+ * @param {string} query - The search term
+ * @returns {Promise<Array>} Array of anime results
+ */
+export async function searchAnime(query) {
+  try {
+    const res = await fetch(`${BASE_URL}/anime?q=${encodeURIComponent(query)}&limit=12`);
+    const data = await res.json();
+    return data.data;
+  } catch (error) {
+    console.error('Failed to search anime:', error);
+    return [];
+  }
+}
 
-  animeList.forEach(anime => {
-    const card = document.createElement('div');
-    card.classList.add('anime-card');
-
-    card.innerHTML = `
-      <img src="${anime.images.jpg.image_url}" alt="${anime.title}">
-      <h3>${anime.title}</h3>
-      <p>Type: ${anime.type}</p>
-      <p>Status: ${anime.status}</p>
-    `;
-
-    container.appendChild(card);
-  });
+/**
+ * Fetch detailed anime info by MAL ID (for detail.html page)
+ * @param {number} id - The MyAnimeList ID of the anime
+ * @returns {Promise<Object|null>} Anime detail object or null on failure
+ */
+export async function getAnimeDetails(id) {
+  try {
+    const res = await fetch(`${BASE_URL}/anime/${id}/full`);
+    const data = await res.json();
+    return data.data;
+  } catch (error) {
+    console.error(`Failed to get details for anime ID ${id}:`, error);
+    return null;
+  }
 }

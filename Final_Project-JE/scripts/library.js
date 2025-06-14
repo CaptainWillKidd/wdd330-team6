@@ -1,15 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const libraryContainer = document.getElementById('libraryContainer');
-  const saved = JSON.parse(localStorage.getItem('watchList')) || [];
+  const library = JSON.parse(localStorage.getItem('library')) || [];
+  const container = document.getElementById('libraryList');
 
-  if (saved.length === 0) {
-    libraryContainer.innerHTML = "<p>No items in your library.</p>";
-  } else {
-    libraryContainer.innerHTML = saved.map(item => `
-      <div class="card">
-        <h3>${item.title}</h3>
-        <p>${item.type} | ${item.status}</p>
-      </div>
-    `).join('');
+  if (library.length === 0) {
+    container.innerHTML = '<p>No anime added yet.</p>';
+    return;
   }
+
+  library.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'anime-card';
+    card.innerHTML = `<h3>${item.title}</h3>`;
+    container.appendChild(card);
+  });
 });
