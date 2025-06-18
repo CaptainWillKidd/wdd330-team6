@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Fullmetal Alchemist: Brotherhood",
+    "type": "TV",
+    "genre": "Action, Adventure, Fantasy",
+    "rating": "PG-13",
+    "status": "Finished Airing"
+  },
+  {
+    "title": "One Piece",
+    "type": "TV",
+    "genre": "Action, Adventure, Comedy",
+    "rating": "PG-13",
+    "status": "Currently Airing"
+  }
+]

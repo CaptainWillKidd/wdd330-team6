@@ -1,21 +1,41 @@
-import { getLibrary, removeFromLibrary } from './storage.js';
-import { createAnimeCard } from './utils.js';
+export function addToLibrary(anime) {
+  const library = JSON.parse(localStorage.getItem('animeLibrary')) || [];
 
-const libraryList = document.getElementById('libraryList');
+  const exists = library.some(item => item.id === anime.id);
+  if (!exists) {
+    library.push(anime);
+    localStorage.setItem('animeLibrary', JSON.stringify(library));
+  }
+}
 
-function renderLibrary() {
-  const library = getLibrary();
-  libraryList.innerHTML = '';
+function displayLibrary() {
+  const container = document.getElementById('libraryList');
+  if (!container) return;
+
+  const library = JSON.parse(localStorage.getItem('animeLibrary')) || [];
+
+  container.innerHTML = '';
 
   if (library.length === 0) {
-    libraryList.innerHTML = '<p>Your library is empty.</p>';
+    container.innerHTML = '<p>No anime in your library yet.</p>';
     return;
   }
 
   library.forEach(anime => {
-    const card = createAnimeCard(anime, false, true); // true = isLibrary
-    libraryList.appendChild(card);
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    card.innerHTML = `
+      <img src="${anime.image}" alt="${anime.title}">
+      <h3>${anime.title}</h3>
+      <p>Score: ${anime.score || 'N/A'}</p>
+    `;
+
+    container.appendChild(card);
   });
 }
 
-renderLibrary();
+// Only run display if we're on the library page
+if (window.location.pathname.includes('library.html')) {
+  displayLibrary();
+}
