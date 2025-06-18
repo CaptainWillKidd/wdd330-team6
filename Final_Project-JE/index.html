@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Anime/Manga Explorer Home Page" />
   <title>Anime/Manga Explorer</title>
   <link rel="stylesheet" href="styles/style.css" />
 </head>
@@ -10,16 +11,16 @@
   <header>
     <h1>Anime/Manga Explorer</h1>
     <nav>
-      <a href="index.html">Home</a>
+      <a href="index.html" class="active">Home</a>
       <a href="search.html">Search</a>
       <a href="library.html">Library</a>
     </nav>
   </header>
 
   <main>
-    <section id="topAnimeSection">
+    <section id="top-anime">
       <h2>Top Anime</h2>
-      <div id="topAnime" class="card-grid"></div>
+      <div id="anime-list" class="card-container"></div>
     </section>
   </main>
 
@@ -27,6 +28,6 @@
     <p>&copy; 2025 Anime/Manga Explorer</p>
   </footer>
 
-  <script src="scripts/api.js"></script>
+  <script type="module" src="scripts/app.js"></script>
 </body>
 </html>

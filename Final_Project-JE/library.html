@@ -3,23 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Library | Anime/Manga Explorer</title>
+  <title>My Library - Anime/Manga Explorer</title>
   <link rel="stylesheet" href="styles/style.css" />
 </head>
 <body>
   <header>
-    <h1>Your Anime Library</h1>
+    <h1>My Library</h1>
     <nav>
       <a href="index.html">Home</a>
       <a href="search.html">Search</a>
-      <a href="library.html">Library</a>
+      <a href="library.html" class="active">Library</a>
     </nav>
   </header>
 
   <main>
-    <section id="library" class="card-container"></section>
+    <section id="libraryList" class="card-grid">
+      <!-- Favorite titles will appear here -->
+    </section>
   </main>
 
-  <script src="scripts/library.js"></script>
+  <footer>
+    <p>&copy; 2025 Anime/Manga Explorer</p>
+  </footer>
+
+  <script type="module" src="scripts/library.js"></script>
 </body>
 </html>

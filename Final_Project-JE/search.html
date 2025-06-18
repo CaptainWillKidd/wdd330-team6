@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Search | Anime/Manga Explorer</title>
+  <title>Anime/Manga Explorer - Search</title>
   <link rel="stylesheet" href="styles/style.css" />
 </head>
 <body>
@@ -11,20 +11,24 @@
     <h1>Anime/Manga Explorer</h1>
     <nav>
       <a href="index.html">Home</a>
-      <a href="search.html">Search</a>
+      <a href="search.html" class="active">Search</a>
       <a href="library.html">Library</a>
     </nav>
   </header>
 
   <main>
-    <section id="search">
+    <section class="search-section">
       <input type="text" id="searchInput" placeholder="Search anime..." />
       <button id="searchButton">Search</button>
     </section>
 
-    <section id="results" class="card-container"></section>
+    <section id="searchResults" class="card-grid"></section>
   </main>
 
-  <script src="scripts/search.js"></script>
+  <footer>
+    <p>&copy; 2025 Anime/Manga Explorer</p>
+  </footer>
+
+  <script type="module" src="scripts/search.js"></script>
 </body>
 </html>

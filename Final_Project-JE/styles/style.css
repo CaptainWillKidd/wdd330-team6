@@ -1,44 +1,107 @@
-/* styles/style.css */
+:root {
+  --midnight: #2c3e50;
+  --coral: #ff6f61;
+  --light: #ecf0f1;
+  --font-main: 'Roboto', sans-serif;
+  --font-head: 'Bebas Neue', cursive;
+}
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: var(--font-main);
   margin: 0;
-  padding: 0;
-  background: #ecf0f1;
+  background-color: var(--light);
+  color: #333;
 }
 
 header {
-  background: #2c3e50;
+  background-color: var(--midnight);
   color: white;
-  padding: 1em;
-  text-align: center;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+nav {
+  margin-top: 0.5rem;
+}
 nav a {
-  margin: 0 1em;
-  color: #ff6f61;
+  color: white;
+  margin: 0 1rem;
   text-decoration: none;
 }
+nav a.active {
+  text-decoration: underline;
+}
 
-main {
-  padding: 1em;
+h1, h2 {
+  font-family: var(--font-head);
 }
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1em;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .card {
-  background: white;
-  border-radius: 8px;
-  padding: 1em;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  animation: fadeIn 0.6s ease-in;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card img {
-  max-width: 100%;
-  border-radius: 4px;
+  width: 100%;
+  height: auto;
+}
+
+.card-content {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.card-content h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+button {
+  background-color: var(--coral);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #e85b50;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--midnight);
+  color: white;
+  margin-top: 2rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
